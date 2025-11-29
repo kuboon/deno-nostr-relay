@@ -15,8 +15,14 @@ type Subscription = {
 
 const app = new Hono();
 
-// NIP-11 Relay Information Document
-app.get("/", (c) => {
+// NIP-11 Relay Information Document (for non-WebSocket requests)
+app.get("/", (c, next) => {
+  // Check if this is a WebSocket upgrade request
+  if (c.req.header("Upgrade")?.toLowerCase() === "websocket") {
+    return next();
+  }
+
+  // Handle NIP-11 Relay Information Document
   if (c.req.header("Accept") === "application/nostr+json") {
     return c.json({
       name: "deno-nostr-relay",
@@ -128,7 +134,6 @@ app.get(
               const [subId] = rest;
               if (typeof subId === "string") {
                 subscriptions.delete(subId);
-                ws.send(JSON.stringify(["CLOSED", subId, ""]));
               }
               break;
             }
@@ -154,6 +159,11 @@ app.get(
 );
 
 // Start server
-const port = parseInt(Deno.env.get("PORT") || "8080");
-console.log(`Nostr relay starting on port ${port}`);
-Deno.serve({ port }, app.fetch);
+const portEnv = Deno.env.get("PORT");
+const port = portEnv ? parseInt(portEnv, 10) : 8080;
+if (isNaN(port) || port < 1 || port > 65535) {
+  console.error("Invalid PORT value, using default 8080");
+}
+const validPort = isNaN(port) || port < 1 || port > 65535 ? 8080 : port;
+console.log(`Nostr relay starting on port ${validPort}`);
+Deno.serve({ port: validPort }, app.fetch);
