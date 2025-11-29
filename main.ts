@@ -46,10 +46,15 @@ app.get(
     return {
       onMessage: async (event, ws) => {
         try {
-          const data =
-            typeof event.data === "string"
-              ? event.data
-              : new TextDecoder().decode(event.data as ArrayBuffer);
+          let data: string;
+          if (typeof event.data === "string") {
+            data = event.data;
+          } else if (event.data instanceof ArrayBuffer) {
+            data = new TextDecoder().decode(event.data);
+          } else {
+            ws.send(JSON.stringify(["NOTICE", "Unsupported message format"]));
+            return;
+          }
           const message = JSON.parse(data);
 
           if (!Array.isArray(message) || message.length === 0) {
