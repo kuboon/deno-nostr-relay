@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net --allow-read --allow-write --unstable-kv main.ts"
+  },
+  "imports": {
+    "@nostrify/nostrify": "jsr:@nostrify/nostrify@^0.38",
+    "@nostrify/denokv": "jsr:@nostrify/denokv@^0.3",
+    "hono": "jsr:@hono/hono@^4",
+    "hono/": "jsr:@hono/hono@^4/"
+  }
+}
