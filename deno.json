@@ -6,7 +6,7 @@
     "@nostrify/nostrify": "jsr:@nostrify/nostrify@^0.46.5",
     "@nostrify/denokv": "jsr:@nostrify/denokv@^0.35.0",
     "@hono/hono": "jsr:@hono/hono@^4.10.7",
-    "@blowater/nostr-sdk": "jsr:@blowater/nostr-sdk@^0.1.6"
+    "@kuboon/nostr-sdk": "jsr:@kuboon/nostr-sdk@^0.2.0"
   },
   "unstable": ["bundle", "kv"],
   "permissions": {

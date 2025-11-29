@@ -1,5 +1,4 @@
 import { app } from "./app.ts";
-import { Hono } from "@hono/hono";
 import { serveStatic } from "@hono/hono/deno";
 
 const bundled = await Deno.bundle({
@@ -21,10 +20,15 @@ app.get("/client/", async (ctx, next) => {
   }
   return next();
 });
-const serveClient = new Hono();
-serveClient.use(serveStatic({ root: "./bundled/" }));
-serveClient.use(serveStatic({ root: "./client/" }));
-app.route("/client", serveClient);
+
+app.get("/client/", serveStatic({ path: "./bundled/index.html" }));
+app.use(
+  serveStatic({
+    root: "./bundled/",
+    rewriteRequestPath: (path) => path.replace("/client/", "/"),
+  }),
+);
+app.use(serveStatic({ root: "./client/" }));
 
 export default {
   fetch: app.fetch,

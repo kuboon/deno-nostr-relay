@@ -5,14 +5,16 @@ const messagesEl = document.getElementById("messages")!;
 const postForm = document.getElementById("post") as HTMLFormElement;
 const contentInput = document.getElementById("content") as HTMLInputElement;
 
-const relays = ["ws://localhost:8080"];
+const loc = globalThis.location;
+loc.protocol = loc.protocol.replace("http", "ws");
+const relays = [loc];
 
 import {
   InMemoryAccountContext,
   NostrKind,
   prepareNostrEvent,
   SingleRelayConnection,
-} from "@blowater/nostr-sdk";
+} from "@kuboon/nostr-sdk";
 
 // minimal interfaces for the methods we use from the SDK
 interface SimpleStream {
