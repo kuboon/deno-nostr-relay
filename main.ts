@@ -92,7 +92,7 @@ app.get(
               const [subId, ...filters] = rest;
               if (
                 typeof subId !== "string" ||
-                !filters.every((f) => typeof f === "object")
+                !filters.every((f) => typeof f === "object" && f !== null)
               ) {
                 ws.send(JSON.stringify(["NOTICE", "Invalid REQ format"]));
                 return;
@@ -160,10 +160,11 @@ app.get(
 
 // Start server
 const portEnv = Deno.env.get("PORT");
-const port = portEnv ? parseInt(portEnv, 10) : 8080;
-if (isNaN(port) || port < 1 || port > 65535) {
+const parsedPort = portEnv ? parseInt(portEnv, 10) : 8080;
+const isValidPort = !isNaN(parsedPort) && parsedPort >= 1 && parsedPort <= 65535;
+if (!isValidPort) {
   console.error("Invalid PORT value, using default 8080");
 }
-const validPort = isNaN(port) || port < 1 || port > 65535 ? 8080 : port;
-console.log(`Nostr relay starting on port ${validPort}`);
-Deno.serve({ port: validPort }, app.fetch);
+const port = isValidPort ? parsedPort : 8080;
+console.log(`Nostr relay starting on port ${port}`);
+Deno.serve({ port }, app.fetch);
