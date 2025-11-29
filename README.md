@@ -1,6 +1,8 @@
 # deno-nostr-relay
 
-A simple Nostr relay server implemented with [Deno](https://deno.land/), [Hono](https://hono.dev/), and [NDenoKv](https://nostrify.dev/store/denokv) from Nostrify.
+A simple Nostr relay server implemented with [Deno](https://deno.land/),
+[Hono](https://hono.dev/), and [NDenoKv](https://nostrify.dev/store/denokv) from
+Nostrify.
 
 ## Features
 
@@ -44,8 +46,10 @@ Connect via WebSocket to `ws://localhost:8080/`
 
 ## Supported NIPs
 
-- [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md): Basic protocol flow description
-- [NIP-11](https://github.com/nostr-protocol/nips/blob/master/11.md): Relay Information Document
+- [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md): Basic
+  protocol flow description
+- [NIP-11](https://github.com/nostr-protocol/nips/blob/master/11.md): Relay
+  Information Document
 
 ## Development
 
