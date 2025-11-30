@@ -1,0 +1,46 @@
+body {
+  font-family: system-ui, Segoe UI, Roboto, Arial;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f8;
+}
+.wrap {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+#messages {
+  height: 60vh;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #e6e6e9;
+  padding: 1rem;
+  border-radius: 6px;
+}
+.msg {
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+.meta {
+  font-size: 0.8rem;
+  color: #666;
+}
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #0066ff;
+  color: #fff;
+}

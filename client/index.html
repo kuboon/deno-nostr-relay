@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simple Nostr Chat</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Simple Nostr Chat</h1>
+      <p class="meta">
+        This client uses nostr-tools (ECDSA keys in browser). Connect to a
+        relay, enter a message, and publish.
+      </p>
+      <div>
+        <label>Relay URL: <input
+            id="relay"
+            type="text"
+            value="ws://localhost:8080"
+            style="width: 60%"
+          /></label>
+        <button id="connect">Connect</button>
+      </div>
+      <div id="messages" aria-live="polite"></div>
+      <form id="post">
+        <input
+          id="content"
+          type="text"
+          placeholder="Say something..."
+          autocomplete="off"
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script type="module" src="./client.ts"></script>
+  </body>
+</html>
